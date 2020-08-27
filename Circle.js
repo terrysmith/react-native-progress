@@ -50,7 +50,8 @@ export class ProgressCircle extends Component {
     borderWidth: 1,
     color: 'rgba(0, 122, 255, 1)',
     direction: 'clockwise',
-    formatText: (progress) => `${Math.round(progress * totalProgress)}`,
+    formatText: (progress, totalProgress) =>
+      `${Math.round(progress * totalProgress)}`,
     progress: 0,
     showsText: false,
     size: 40,
@@ -98,6 +99,7 @@ export class ProgressCircle extends Component {
       unfilledColor,
       endAngle,
       allowFontScaling,
+      totalProgress,
       ...restProps
     } = this.props;
 
@@ -203,7 +205,7 @@ export class ProgressCircle extends Component {
               ]}
               allowFontScaling={allowFontScaling}
             >
-              {formatText(progressValue)}
+              {formatText(progressValue, totalProgress)}
             </Text>
           </View>
         ) : (
