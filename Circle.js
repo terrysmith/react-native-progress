@@ -6,7 +6,7 @@ import { Surface as ARTSurface } from '@react-native-community/art';
 import Arc from './Shapes/Arc';
 import withAnimation from './withAnimation';
 
-const CIRCLE = Math.PI * 1;
+const CIRCLE = Math.PI * 1.6;
 
 const AnimatedSurface = Animated.createAnimatedComponent(ARTSurface);
 const AnimatedArc = Animated.createAnimatedComponent(Arc);
@@ -34,6 +34,7 @@ export class ProgressCircle extends Component {
       PropTypes.instanceOf(Animated.Value),
     ]),
     rotation: PropTypes.instanceOf(Animated.Value),
+    speedoMeterDegreeRotation: PropTypes.string,
     showsText: PropTypes.bool,
     size: PropTypes.number,
     style: PropTypes.any,
@@ -55,6 +56,7 @@ export class ProgressCircle extends Component {
     progress: 0,
     showsText: false,
     size: 40,
+    speedoMeterDegreeRotation: '216deg',
     thickness: 3,
     endAngle: 0.9,
     allowFontScaling: true,
@@ -90,6 +92,7 @@ export class ProgressCircle extends Component {
       indeterminate,
       progress,
       rotation,
+      speedoMeterDegreeRotation,
       showsText,
       size,
       style,
@@ -112,7 +115,6 @@ export class ProgressCircle extends Component {
     };
     const textOffset = border + thickness;
     const textSize = size - textOffset * 2;
-
     const Surface = rotation ? AnimatedSurface : ARTSurface;
     const Shape = animated ? AnimatedArc : Arc;
     const progressValue = animated ? this.progressValue : progress;
@@ -134,7 +136,7 @@ export class ProgressCircle extends Component {
                         inputRange: [0, 1],
                         outputRange: ['0deg', '360deg'],
                       })
-                    : '270deg',
+                    : speedoMeterDegreeRotation,
               },
             ],
           }}
